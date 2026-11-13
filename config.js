@@ -1,12 +1,19 @@
+require("dotenv").config()
+
 //import library mysql
 const mysql = require("mysql") 
 
+const requiredDatabasePassword = process.env.DB_PASSWORD
+if (!requiredDatabasePassword) {
+    throw new Error("DB_PASSWORD is not configured. Add it to the backend .env file.")
+}
+
 //inisialisasi database yang digunakan
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "moklet_rest_api"
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: requiredDatabasePassword,
+    database: process.env.DB_NAME || "moklet_rest_api"
 })
 
 //lakukan koneksi database
