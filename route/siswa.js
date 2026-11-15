@@ -90,7 +90,7 @@ app.post("/save", (req,res) => {
             message : message
         }
         res.setHeader("Content-Type","application/json")
-        res.send(JSON.stringify(response))
+        res.status(err ? 400 : 200).send(JSON.stringify(response))
     })
 })
 
